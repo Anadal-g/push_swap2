@@ -1,0 +1,93 @@
+
+tenemos stack a y stack b
+stack a conteniene una cantidad aleatoria de numeros positivos o negativos y nunca duplicados
+el objetivo es ordenar los numeros de stack a en orden ascendente con las siguientes operaciones
+- SA intercambia los dos primeros elementos de stack a, si hay uno o menos no hace nada
+- SB intercambia los dos primeros elementos de stack b, si hay uno o menos no hace nada
+- SS swap a y swap b a la vez
+- PA coge el primer elemento de stack b y lo pone en el stack a, si b esta vacio no hace nada
+- PB coge el primer elemento de stack a y lo pone en el stack b, si a esta vacio no hace nada
+- RA desplza hacia arriba todos los elementos del stack a de manera que el prrimer elemento pasa al ultimo
+- RB desplza hacia arriba todos los elementos del stack b de manera que el prrimer elemento pasa al ultimo
+- RR ra y rb al mismo tiempo
+- RRA desplaza los elementos hacia abajo del stack a de manera que el ultimo elemento pasa a ser el primero
+- RRB desplaza los elementos hacia abajo del stack b de manera que el ultimo elemento pasa a ser el primero
+- RRR rra y rrb al mismo tiempo
+
+makefile sin relink
+prohibido variables globales
+la lista más corta posible de instrucciones
+las intrucciones separadas por \n 
+el minimo numero de operaaciones posible
+si no se dan parametros no se debe mostrar nada y devolver el control de usuario
+en caso de error devolver "Error \n"
+solo nemros enteros y no duplicados
+
+numeros validos
+duplicados
+listas ya ordenadas
+memoria 
+
+	ORDENACION
+void sort_small_stack(t_stack *a, t_stack *b);
+// Para 2-5 elementos, puedes usar algoritmos específicos para minimizar los movimientos.
+void sort_large_stack(t_stack *a, t_stack *b);
+// Para listas más grandes, puedes usar un algoritmo como Quick Sort adaptado para el proyecto o Radix Sort.
+
+	FUNCIONES DE UTILIDAD
+int validate_input(char **argv);
+// Valida si los argumentos de entrada son números y no tienen duplicados
+int is_sorted(t_stack *a);
+// Verifica si la pila está ordenada
+void print_stack(t_stack *stack);
+// Muestra el contenido de la pila (opcional para depuración)
+
+	PRINCIPAL
+int main(int argc, char **argv)
+
+int main(int argc, char **argv)
+{
+    t_stack *a;
+    t_stack *b;
+
+    if (argc < 2)
+        return (0);
+    if (!validate_input(argv))
+    {
+        ft_putstr_fd("Error\n", 2);
+        return (1);
+    }
+    a = init_stack();
+    b = init_stack();
+    fill_stack(a, argv); // Llenar la pila a con los números de argv
+
+    if (!is_sorted(a))
+    {
+        if (a->size <= 5)
+            sort_small_stack(a, b);
+        else
+            sort_large_stack(a, b);
+    }
+
+    free_stack(a);
+    free_stack(b);
+    return (0);
+}
+
+	PARA LLENAR Y LIMPIAR LA PILA INICIALMENTE 
+void fill_stack(t_stack *a, char **argv);
+// Llena la pila a con los números dados como argumentos
+
+
+	RESUMEN
+1 Estructuras: Define t_node y t_stack.
+2 Operaciones de Pila: Crea funciones para manipular las pilas (push, pop, etc.).
+3 Operaciones Permitidas: Implementa las operaciones (sa, pb, ra, rra, etc.).
+4 Algoritmos de Ordenación: Define algoritmos específicos para tamaños pequeños y grandes.
+5 Utilidad y Validación: Funciones de validación, impresión y verificación de orden.
+6 Función Principal: Controla el flujo del programa (main).
+7 Memoria: Asegúrate de liberar toda la memoria utilizada para evitar fugas.
+
+Este esquema general te guiará para completar el proyecto Push_swap. 
+Cada parte del código cumple un propósito específico para 
+facilitar la organización, manipulación y optimización de la pila.
